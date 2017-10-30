@@ -1,6 +1,9 @@
 # http://code.markedmondson.me/googleAnalyticsR/setup.html
 # http://code.markedmondson.me/googleAnalyticsR/v4.html
 
+# https://github.com/cristianodalfarra/forecastR
+
+
 ## setup
 library(googleAnalyticsR)
 
@@ -19,7 +22,7 @@ library(highcharter)
 library(googleAnalyticsR)
 library(forecast)
 
-
+#########  GA data
 
 gadata = NULL
 gadata <- google_analytics_4(ga_id, 
@@ -54,16 +57,17 @@ df <- summary(f)
 # http://pbpython.com/prophet-overview.html
 # https://cran.r-project.org/web/packages/prophet/vignettes/quick_start.html
 ##########test3 prophete
+library(forecast)
 gadata = NULL
 gadata <- google_analytics_4(ga_id, 
                              date_range = c("2015-01-01", "2017-10-30"),
-                             metrics = "users", 
+                             metrics = "pageviews", 
                              dimensions = c("yearMonth"),
                              max = -1)
-
+gadata[1]=as.Date(paste0(as.character(gadata$yearMonth), '01'), format='%Y%m%d')
 colnames(gadata)[1] <- "ds"
 colnames(gadata)[2] <- "y"
-gadata[1]=c(gadata[,1],"01",sep="!")
+
 library(prophet)
 
 m <- prophet(gadata)

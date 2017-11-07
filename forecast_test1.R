@@ -199,7 +199,8 @@ hchart(forecast(forecast1, h = 14)) %>%
   hc_title(text = "telefono" )
 p <- predict(forecast1, 14, prediction.interval = TRUE)
 plot(forecast1, p)
-
+purchaseforecastmn <- forecast.HoltWinters(object = forecast1, level = 95, h = 14)
+predict.data <- as.data.frame(purchaseforecastmn)  # print prediction
 
 ############################################################
 ############# telefono eventi PROPHETE #####################
